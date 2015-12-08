@@ -1,18 +1,21 @@
 'use strict';
 
-var _startTime;
-
+var startTime
+var times = [];
+var isRunning = false;
 var stopwatch;
 
 var start = function () {
-	_startTime = Date.now();
+	startTime = Date.now();
 };
 
-var stop = function () {};
+var stop = function () {
+	times.push(read());
+};
 
 var read = function () {
-	if (_startTime) {
-		return Date.now() - _startTime;
+	if (isRunning) {
+		return Date.now() - startTime;
 	}
 };
 

@@ -56,12 +56,26 @@ describe('read', function () {
 });
 
 describe('stop', function () {
-	before(function () {
+	before(function (done) {
+		var TIMEOUT = 10;
+		app.reset();
 		app.start();
+
+		setTimeout(function () {
+			app.stop();
+			done();
+		}, TIMEOUT);
 	});
 
-	it('should stop the timer', function () {
+	it('should stop the timer', function (done) {
+		var result = app.read();
+		var TIMEOUT = 10;
 
+		setTimeout(function () {
+			var result2 = app.read();
+			will(result).be(result2);	
+			done();
+		}, TIMEOUT);
 	});
 });
 
